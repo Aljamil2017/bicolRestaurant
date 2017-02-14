@@ -18,3 +18,11 @@ git push -u origin master
 		=>username: WebDev2017
 		=>password: helloworld2017
 
+To update a file:
+  -> edit the file you want
+  -> git add [filename]
+  -> git commit -m "[message/info you update]"
+  -> git push -u origin master
+       =>username: WebDev2017
+       =>password: helloworld2017
+
