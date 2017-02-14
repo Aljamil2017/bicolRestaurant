@@ -1,0 +1,12 @@
+
+
+
+
+push an existing repository from the command line
+
+git remote add origin https://WebDev2017/Aljamil/bicolRestaurant.git
+git push -u origin master
+
+username: WebDev2017
+password: helloworld2017
+
