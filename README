@@ -1,12 +1,20 @@
 
+Configure Account:
+git config --global user.name "WebDev2017"
+git config --global user.email "aarazas@gbox.adnu.edu.ph"
 
-
-
-push an existing repository from the command line
-
-git remote add origin https://WebDev2017/Aljamil/bicolRestaurant.git
+Create a new repository on the command line:
+echo "# bicolRestaurant" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/WebDev2017/bicolRestaurant.git
 git push -u origin master
 
-username: WebDev2017
-password: helloworld2017
+Push an existing repository from the command line: 
+git remote add origin https://github.com/WebDev2017/bicolRestaurant.git
+git push -u origin master
+
+		=>username: WebDev2017
+		=>password: helloworld2017
 
