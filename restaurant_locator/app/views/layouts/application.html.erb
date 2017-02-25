@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Restaurant Locator</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'main', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'jquery-2.1.1.min', 'data-turbolinks-track' => true %>
+   <%= javascript_include_tag 'bootstrap.min', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyAK04aYSxZArPElFFZfo3o2p-CbviPzfhc&sensor=false" %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="stylesheets/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="stylesheets/shop-homepage.css" type="text/css">
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

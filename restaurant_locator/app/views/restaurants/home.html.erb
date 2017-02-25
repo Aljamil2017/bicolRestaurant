@@ -1,0 +1,46 @@
+<div class="container">
+<center>
+<h2>RESTAURANT LOCATOR SYSTEM</h2>
+<a href="customers/registration" class="btn btn-success">Customer Registration</a>
+<a href="restaurants/registration" class="btn btn-primary">Restaurant Registration</a>
+
+
+<p></p>
+<h3>Restaurant Accounts</h3>
+<table>
+<tr>
+<th>Restaurant name:</th>
+<th></th>
+</tr>
+<tr>
+<% @restaurants.each do |r| %>
+	<tr>
+   		<td><%= r.restaurant_name %></td>
+   		<td><a href="restaurants/info/<%= r.id %>" class="btn btn-default">details</a></td>
+   		<td><a href="restaurants/info/<%= r.id %>/edit_registration" class="btn btn-primary">edit</a></td>
+   		<td><a href="restaurants/<%= r.id %>/deactivate" class="btn btn-danger">deactivate</a></td>
+   	</tr>
+<% end %>
+</table>
+
+<p></p>
+<h3>Customer Accounts</h3>
+<table>
+<tr>
+<th>Customers name:</th>
+<th></th>
+</tr>
+<tr>
+<% Customer.all.each do |c| %>
+	<tr>
+   		<td><%= c.c_firstname %> <%= c.c_middlename %> <%= c.c_lastname %></td>
+   		<td><a href="cus/<%= c.id %>/homepage" class="btn btn-primary">View Restaurants</a></td>
+   	</tr>
+<% end %>
+</tr>
+</table>
+
+</center>
+</div>
+
+

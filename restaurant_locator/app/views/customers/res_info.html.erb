@@ -1,0 +1,151 @@
+
+<style>
+#map-canvas {
+    width:410px;
+    height:calc(100% - 0);
+    position:absolute;
+    margin-left: 20px;
+    top:120px;
+    bottom:50px;
+    overflow:hidden;
+}
+</style>
+
+<script type="text/javascript">
+
+      initMap();
+
+      function initMap() {
+
+          var pointA = new google.maps.LatLng("<%= @customer.c_latitude %>", "<%= @customer.c_longitude %>"),
+          pointB = new google.maps.LatLng("<%= @restaurant.r_latitude %>", "<%= @restaurant.r_longitude %>"),
+          myOptions = {
+            center: pointA
+          },
+          map = new google.maps.Map(document.getElementById("map-canvas"), myOptions),
+          // Instantiate a directions service.
+
+          directionsService = new google.maps.DirectionsService,
+          directionsDisplay = new google.maps.DirectionsRenderer({
+            map: map,
+            suppressMarkers: true,
+            polylineOptions: {
+              strokeColor: "red",
+              strokeOpacity: 0.7,
+              strokeWeight: 5
+           }
+          }),
+
+          markerA = new google.maps.Marker({
+            position: pointA,
+            title: "Customer",
+            icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+            map: map
+          }),
+          markerB = new google.maps.Marker({
+            position: pointB,
+            title: "Restaurant",
+            icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+            map: map
+          });
+
+        // get route from A to B
+        calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+
+      }
+
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+        directionsService.route({
+          origin: pointA,
+          destination: pointB,
+          travelMode: google.maps.TravelMode.WALKING
+        }, function(response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+           
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+</script>
+
+
+
+<div id="map-canvas">Map Here</div>
+
+<center>
+<%= link_to "Admin Home", root_path, :class => "btn btn-primary" %>
+
+<h2>Restaurant Details</h2>
+
+
+<p>
+  <strong>Restaurant Name:</strong>
+  <%= @restaurant.restaurant_name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @restaurant.r_address %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @restaurant.r_contact %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @restaurant.r_style %>
+</p>
+
+<p>
+  <strong>Opening Time:</strong>
+  <%= @restaurant.r_start_time %>
+</p>
+
+<p>
+  <strong>Closing Time:</strong>
+  <%= @restaurant.r_close_time %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @restaurant.r_longitude %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @restaurant.r_latitude %>
+</p>
+
+<button onclick="initMap()">Reload Map</button>
+
+<h3>MENU</h3>
+<table>
+<% @menutype.each do |menutype| %>
+    <tr>
+      <th><strong><%= menutype.menu_name %></strong></th>
+    </tr>
+    <td>
+    <%  Dish.where(menutype_id: menutype.id).each do |dish| %>
+        
+        <p><%= dish.dish_name %> - <%= dish.dish_price %></p>
+        
+      <% end %>
+    </td>
+  <% end %>
+</table>
+</center>
+<style>
+th, td {
+  font-size: 16px;
+  border: 2px solid black;
+}
+</style>
+
+
+<p></p>
+</div>

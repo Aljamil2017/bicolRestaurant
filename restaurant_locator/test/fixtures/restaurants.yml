@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  r_username: MyString
+  r_password: MyString
+  restaurant_name: MyString
+  r_contact: MyString
+  r_address: MyString
+  r_style: MyString
+  r_email: MyString
+  r_start_time: MyString
+  r_close_time: MyString
+  r_longitude: MyString
+  r_latitude: MyString
+
+two:
+  r_username: MyString
+  r_password: MyString
+  restaurant_name: MyString
+  r_contact: MyString
+  r_address: MyString
+  r_style: MyString
+  r_email: MyString
+  r_start_time: MyString
+  r_close_time: MyString
+  r_longitude: MyString
+  r_latitude: MyString

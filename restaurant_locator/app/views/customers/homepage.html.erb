@@ -1,0 +1,23 @@
+<div class="container">
+<center>
+<h2>RESTAURANT LOCATOR SYSTEM</h2>
+<%= link_to "Admin home", root_path, :class => "btn btn-primary" %>
+<p>user id: <%= session[:c_id] %></p>
+
+<p></p>
+<h3>Restaurant Accounts</h3>
+<table>
+<tr>
+<th>Restaurant name:</th>
+<th></th>
+</tr>
+<tr>
+<% @restaurants.each do |r| %>
+	<tr>
+   		<td><%= r.restaurant_name %></td>
+   		<td><a href="res_info/<%= r.id %>" class="btn btn-default">details</a></td>
+   	</tr>
+<% end %>
+</table>
+
+
