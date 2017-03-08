@@ -29,7 +29,7 @@ class RestaurantsController < ApplicationController
 		@restaurant =  Restaurant.find(params[:id])
 		session[:r_id] = @restaurant.id
 		@menutype = Menutype.where(restaurant_id: @restaurant)
-		
+
 		@menutype_new = Menutype.new
 		
 		@dish = Dish.new

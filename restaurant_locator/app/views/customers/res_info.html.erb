@@ -1,4 +1,3 @@
-
 <style>
 #map-canvas {
     width:410px;
@@ -9,7 +8,37 @@
     bottom:50px;
     overflow:hidden;
 }
-</style>
+</style> 
+ <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to "Restaurant Locator System", root_path, :class => "navbar-brand" %>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">Current User: <%= Customer.find_by(id: session[:c_id]).c_firstname %></a>
+                    </li>
+                    <li>
+                       
+                    </li>
+                </ul>
+                
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
 
 <script type="text/javascript">
 
@@ -73,14 +102,12 @@
 
 
 
-<div id="map-canvas">Map Here</div>
+
 
 <center>
-<%= link_to "Admin Home", root_path, :class => "btn btn-primary" %>
-
 <h2>Restaurant Details</h2>
 
-
+<p><div id="map-canvas">Map Here</div></p>
 <p>
   <strong>Restaurant Name:</strong>
   <%= @restaurant.restaurant_name %>
@@ -126,10 +153,10 @@
 <h3>MENU</h3>
 <table>
 <% @menutype.each do |menutype| %>
-    <tr>
-      <th><strong><%= menutype.menu_name %></strong></th>
+    <tr style="border-color: white">
+      <th style="border-color: white"><strong><%= menutype.menu_name %></strong></th>
     </tr>
-    <td>
+    <td style="border-color: white">
     <%  Dish.where(menutype_id: menutype.id).each do |dish| %>
         
         <p><%= dish.dish_name %> - <%= dish.dish_price %></p>

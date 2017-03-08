@@ -36,7 +36,20 @@ class CustomersController < ApplicationController
 
 
 
-	def customer_update
+	def edit_creg
+		@customer =  Customer.find(params[:id])
+	end
 
+	def customer_update
+		@customer =  Customer.find(params[:id])
+		@customer.update({:c_firstname => params[:customer][:c_firstname],
+				:c_middlename => params[:customer][:c_middlename],
+				:c_lastname => params[:customer][:c_lastname],
+				:c_address => params[:customer][:c_address],
+				:c_contact => params[:customer][:c_contact],
+				:c_email => params[:customer][:c_email],
+				:c_longitude => params[:customer][:c_longitude],
+				:c_latitude => params[:customer][:c_latitude] })
+		redirect_to "/cus/#{@customer.id}/homepage"
 	end
 end
