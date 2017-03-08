@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'cus/:id/homepage', to: 'customers#homepage'
   get 'customers/registration', to: 'customers#registration'
   post 'customers/register', to: 'customers#register'
+  get 'customers/:id/edit_creg', to: 'customers#edit_creg'
+  patch 'customers/:id/update', to: 'customers#customer_update'
 
   get 'cus/:id/res_info/:id', to: 'customers#res_info'
 
