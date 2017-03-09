@@ -1,70 +1,65 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <%= link_to "Restaurant Locator System", root_path, :class => "navbar-brand", :id => "hcolor" %>
+    <div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Restaurant
+                        <strong>Accounts</strong>
+                    </h2>
+                    <hr>
+                </div>
+
+                <div class="col-md-6">
+                    <table>
+                    <tr>
+                    <% @restaurants.each do |r| %>
+                      <tr>
+                          <td> <%= r.restaurant_name %> </td>
+                          <td> <a href="restaurants/info/<%= r.id %>" class="btn btn-default"> details </a> </td>
+                          <td> <a href="restaurants/info/<%= r.id %>/edit_registration" class="btn btn-primary"> edit </a> </td>
+                          <td> <a href="restaurants/<%= r.id %>/deactivate" class="btn btn-danger"> deactivate </a></td>
+                        </tr>
+                    <% end %>
+                    </table>
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="customers/registration" id="hcolor">Customer Registration</a>
-                    </li>
-                    <li>
-                       <a href="restaurants/registration" id="hcolor">Restaurant Registration</a>
-                    </li>
-                </ul>
-                
-            </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
-    </nav>
 
-<div class="container">
-<center>
-<p></p>
-<h3>Restaurant Accounts</h3>
-<table>
-<tr>
-<th>Restaurant name:</th>
-<th></th>
-</tr>
-<tr>
-<% @restaurants.each do |r| %>
-	<tr>
-   		<td> <%= r.restaurant_name %> </td>
-   		<td> <a href="restaurants/info/<%= r.id %>" class="btn btn-default"> details </a> </td>
-   		<td> <a href="restaurants/info/<%= r.id %>/edit_registration" class="btn btn-primary"> edit </a> </td>
-   		<td> <a href="restaurants/<%= r.id %>/deactivate" class="btn btn-danger"> deactivate </a></td>
-   	</tr>
-<% end %>
-</table>
 
-<p></p>
-<h3>Customer Accounts</h3>
-<table>
-<tr>
-<th>Customers name:</th>
-<th></th>
-</tr>
-<tr>
-<% Customer.all.each do |c| %>
-	<tr>
-   		<td> <%= c.c_firstname %> <%= c.c_middlename %> <%= c.c_lastname + " " %> </td>
-   		<td> <a href="cus/<%= c.id %>/homepage" class="btn btn-primary"> View Restaurants </a> </td>
-   	</tr>
-<% end %>
-</tr>
-</table>
 
-</center>
-</div>
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Customers
+                        <strong>Accounts</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <table>
+
+                    <tr>
+                    <% Customer.all.each do |c| %>
+                      <tr>
+                          <td> <%= c.c_firstname %> <%= c.c_middlename %> <%= c.c_lastname + " " %> </td>
+                          <td> <a href="cus/<%= c.id %>/homepage" class="btn btn-primary"> View Restaurants </a> </td>
+                        </tr>
+                    <% end %>
+                    </tr>
+                    </table>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+
+
+         
+
+    </div>
+    <!-- /.container -->
 
 

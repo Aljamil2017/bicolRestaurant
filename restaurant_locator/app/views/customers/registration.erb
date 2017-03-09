@@ -1,86 +1,120 @@
+    
 
-<center>
-<%= link_to "Home", root_path, :class => "btn btn-primary" %>
 
-<h2>Customer Registration</h2>
-<%= form_for(@customer, :url => {:action => "register"}) do |f| %>
-
-	<%= f.label :username %>
-	<p><%= f.text_field :c_username %></p>
-
-	<%= f.label :password %>
-	<p><%= f.password_field :c_password %></p>
-
-	<%= f.label :first_name %>
-	<p><%= f.text_field :c_firstname %></p>
-
-	<%= f.label :middle_name %>
-	<p><%= f.text_field :c_middlename %></p>
-
-	<%= f.label :last_name %>
-	<p><%= f.text_field :c_lastname %></p>
-
-	<%= f.label :address %>
-	<p><%= f.text_field :c_address %></p>
-
-	<%= f.label :Contact %>
-	<p><%= f.text_field :c_contact %></p>
-
-	<%= f.label :email %>
-	<p><%= f.text_field :c_email %></p>
-
-    <%= f.label :longitude %>
-    <p><%= f.text_field :c_longitude, :id => 'lngbox' %></p>
-
-    <%= f.label :latitude %>
-    <p><%= f.text_field :c_latitude, :id => 'latbox' %></p>
-
-    <%= f.submit "Register", class: "btn btn-primary" %>
-<% end %>
-</center>
-<div id="map-canvas">here</div>
 <style>
 #map-canvas {
     width:410px;
     height:calc(100% - 0);
     position:absolute;
-    margin-left: 20px;
-    top:120px;
-    bottom:50px;
+    margin-left: 2px;
+    margin-top: 300px;
+    bottom: 50px; 
+    top:150px;
     overflow:hidden;
 }
-</style>
 
-<script type="text/javascript">
-      initialize();
+</style> 
 
-      function initialize() {
-        var myLatlng = new google.maps.LatLng(13.6248703232628,123.18787491793819);
-        var mapOptions = {
-        zoom: 16,
-        center: myLatlng
-        }
-        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+<div class="container">
+    <div class="row">
+        <center>
 
-       var marker = new google.maps.Marker({
-            map: map,
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            position: myLatlng
-        });
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Customer Registration</h2>
+                    <hr>
+                    <%= link_to "Home", root_path, :class => "btn btn-primary" %>
 
-        google.maps.event.addListener(marker, 'click', function (event) {
-        document.getElementById("latbox").value = event.latLng.lat();
-        document.getElementById("lngbox").value = event.latLng.lng();
-        });
+                    <%= form_for(@customer, :url => {:action => "register"}) do |f| %>
 
-        google.maps.event.addListener(marker, 'dragend', function (event) {
-        document.getElementById("latbox").value = this.getPosition().lat();
-        document.getElementById("lngbox").value = this.getPosition().lng();
-        });
+                        <div class="col-lg-6">
+                            <p><%= f.label :username %></p>
+                            <%= f.text_field :c_username %>
+
+                            <p><%= f.label :password %></p>
+                            <%= f.password_field :c_password %>
+
+                            <p><%= f.label :first_name %></p>
+                            <%= f.text_field :c_firstname %>
+
+                            <p><%= f.label :middle_name %></p>
+                            <%= f.text_field :c_middlename %>
+
+                            <p><%= f.label :last_name %></p>
+                            <%= f.text_field :c_lastname %>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <p><%= f.label :address %></p>
+                            <%= f.text_field :c_address %>
+
+                            <p><%= f.label :Contact %></p>
+                            <%= f.text_field :c_contact %>
+
+                            <p><%= f.label :email %></p>
+                            <%= f.text_field :c_email %>
+
+                            <p><%= f.label :longitude %></p>
+                            <%= f.text_field :c_longitude, :id => 'lngbox' %>
+
+                            <p><%= f.label :latitude %></p>
+                            <%= f.text_field :c_latitude, :id => 'latbox' %>
+                        </div>
+
+                        <div class = "col-lg-12">
+                            
+                            <div id="map-canvas">here</div>
+
+                             <script type="text/javascript">
+                      initialize();
+
+                      function initialize() {
+                        var myLatlng = new google.maps.LatLng(13.6248703232628,123.18787491793819);
+                        var mapOptions = {
+                        zoom: 16,
+                        center: myLatlng
+                        }
+                        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+                       var marker = new google.maps.Marker({
+                            map: map,
+                            draggable: true,
+                            animation: google.maps.Animation.DROP,
+                            position: myLatlng
+                        });
+
+                        google.maps.event.addListener(marker, 'click', function (event) {
+                        document.getElementById("latbox").value = event.latLng.lat();
+                        document.getElementById("lngbox").value = event.latLng.lng();
+                        });
+
+                        google.maps.event.addListener(marker, 'dragend', function (event) {
+                        document.getElementById("latbox").value = this.getPosition().lat();
+                        document.getElementById("lngbox").value = this.getPosition().lng();
+                        });
+                      
+                      }
+                    </script>
+                        </div>
+                        
+
+
+
+                        <p></p>
+                        <p><%= f.submit "Register", class: "btn btn-primary" %></p>
+                    
+                    <% end %>
+
+
+
+                   
+                </div>
+            </div>
       
-      }
+        </center>
+        
+        
 
-     
-
-</script>
+    </div>
+</div>
