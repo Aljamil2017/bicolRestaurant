@@ -21,8 +21,15 @@ class RestaurantsController < ApplicationController
 		@restaurant.r_close_time = params[:restaurant][:r_close_time]
 		@restaurant.r_longitude = params[:restaurant][:r_longitude]
 		@restaurant.r_latitude = params[:restaurant][:r_latitude]
-		@restaurant.save
-		redirect_to root_path
+		
+		# temporary validator for restaurant registration
+		# dapat may laman gabos na text field pag igwa, register
+		if @restaurant.save
+			redirect_to root_path
+		# pag may sarong mayong laman, balik sa registration page, wala pang error print
+		else
+			redirect_to "/restaurants/registration"
+		end
 	end
 
 	def info
