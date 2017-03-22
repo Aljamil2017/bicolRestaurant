@@ -22,8 +22,14 @@ class CustomersController < ApplicationController
 		@customer.c_email = params[:customer][:c_email]
 		@customer.c_longitude = params[:customer][:c_longitude]
 		@customer.c_latitude = params[:customer][:c_latitude]
-		@customer.save
-		redirect_to root_path
+		if @customer.save
+			flash[:success] = "Successfully Created Customer"
+			redirect_to root_path
+		# pag may sarong mayong laman, balik sa registration page, wala pang error print
+		else
+			flash[:error] = "Error in Creating Customer"
+			redirect_to "/customers/registration"
+		end
 	end
 
 
@@ -33,8 +39,6 @@ class CustomersController < ApplicationController
 		@menutype = Menutype.where(restaurant_id: @restaurant)
 		@dishes = Dish.all
 	end
-
-
 
 	def edit_creg
 		@customer =  Customer.find(params[:id])
@@ -52,4 +56,11 @@ class CustomersController < ApplicationController
 				:c_latitude => params[:customer][:c_latitude] })
 		redirect_to "/cus/#{@customer.id}/homepage"
 	end
+	
+	def deactivate
+		@customer =  Customer.find(params[:id])
+		@customer.destroy
+		redirect_to root_path
+	end
+
 end

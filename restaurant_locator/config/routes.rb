@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'customers/register', to: 'customers#register'
   get 'customers/:id/edit_creg', to: 'customers#edit_creg'
   patch 'customers/:id/update', to: 'customers#customer_update'
+  get '/customers/:id/deactivate', to: 'customers#deactivate'
 
   get 'cus/:id/res_info/:id', to: 'customers#res_info'
 

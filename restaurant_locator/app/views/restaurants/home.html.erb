@@ -46,6 +46,7 @@
                       <tr>
                           <td> <%= c.c_firstname %> <%= c.c_middlename %> <%= c.c_lastname + " " %> </td>
                           <td> <a href="cus/<%= c.id %>/homepage" class="btn btn-primary"> View Restaurants </a> </td>
+						  <td> <a href="customers/<%= c.id %>/deactivate" class="btn btn-danger"> deactivate </a></td>
                         </tr>
                     <% end %>
                     </tr>

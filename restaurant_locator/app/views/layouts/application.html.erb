@@ -40,23 +40,23 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                      <!-- Fixed redirect to home while in cust reg or resto reg -->
-                        <a href="/">Home</a>
+                        <a href="/">Home</a> <!-- replaced # with / d gumagana eh -->
                     </li>
                     <li>
                         <a href="../../customers/registration">Customer Registration</a>
                     </li>
                     <li>
-                      <!-- Fix redirect to resto reg while in cust reg and vice versa -->
-                        <a href="../../restaurants/registration">Restaurant Registration</a>
+                        <a href="../../restaurants/registration">Restaurant Registration</a> <!-- added ../../ d gumagana pag clinick ung resto reg habang nasa customer reg -->
                     </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
+		<% flash.each do |key, value| %>
+		<div class="alert alert-<%= key %>"><%= value %></div>
+		<% end %>
         <!-- /.container -->
     </nav>
-
 
 <%= yield %>
 

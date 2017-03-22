@@ -29,7 +29,7 @@
 <center>
 <h2>Restaurant Registration</h2>
 <%= form_for(@restaurant, :url => {:action => "register"}) do |f| %>
-
+	<div class="col-lg-6">
 	<%= f.label :username %>
 	<p><%= f.text_field :r_username %></p>
 
@@ -44,7 +44,8 @@
 
 	<%= f.label :address %>
 	<p><%= f.text_field :r_address %></p>
-
+	</div>
+	<div class="col-lg-6">
 	<%= f.label :style %>
 	<p><%= f.text_field :r_style %></p>
 
@@ -62,7 +63,7 @@
 
 	<%= f.label :latitude %>
 	<p><%= f.text_field :r_latitude, :id => 'latbox' %></p>
-
+	</div>
     <%= f.submit "Register", class: "btn btn-primary" %>
 <% end %>
 </center>
@@ -72,9 +73,10 @@
     width:410px;
     height:calc(100% - 0);
     position:absolute;
-    margin-left: 20px;
-    top:120px;
-    bottom:-350px;
+    margin-left: 470px;
+    margin-top: 300px;
+    bottom: -120px; 
+    top:100px;
     overflow:hidden;
 }
 </style>

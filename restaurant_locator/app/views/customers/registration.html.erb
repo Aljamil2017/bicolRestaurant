@@ -1,0 +1,115 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to "Restaurant Locator System", root_path, :class => "navbar-brand" %>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                    <li>
+                       
+                    </li>
+                </ul>
+                
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+<center>
+<h2>Customer Registration</h2>
+<%= form_for(@customer, :url => {:action => "register"}) do |f| %>
+	<div class="col-lg-6">
+	<%= f.label :username %>
+	<p><%= f.text_field :c_username %></p>
+
+	<%= f.label :password %>
+	<p><%= f.password_field :c_password %></p>
+	
+	<%= f.label :firstname %>
+	<p><%= f.text_field :c_firstname %></p>
+	
+	<%= f.label :middlename %>
+	<p><%= f.text_field :c_middlename %></p>
+	
+	<%= f.label :lastname %>
+	<p><%= f.text_field :c_lastname %></p>
+
+	</div>
+	<div class="col-lg-6">
+
+	<%= f.label :Contact %>
+	<p><%= f.text_field :c_contact %></p>
+
+	<%= f.label :address %>
+	<p><%= f.text_field :c_address %></p>
+	
+	<%= f.label :email %>
+	<p><%= f.text_field :c_email %></p>
+
+	<%= f.label :longitude %>
+	<p><%= f.text_field :c_longitude, :id => 'lngbox' %></p>
+
+	<%= f.label :latitude %>
+	<p><%= f.text_field :c_latitude, :id => 'latbox' %></p>
+	</div>
+    <%= f.submit "Register", class: "btn btn-primary" %>
+<% end %>
+</center>
+<style>
+
+#map-canvas {
+    width:410px;
+    height:calc(100% - 0);
+    position:absolute;
+    margin-left: 470px;
+    margin-top: 300px;
+    bottom: -90px; 
+    top:100px;
+    overflow:hidden;
+}
+</style>
+
+<div id="map-canvas">here</div>
+  <script type="text/javascript">
+        initialize();
+      function initialize() {
+        var myLatlng = new google.maps.LatLng(13.6248703232628,123.18787491793819);
+        var mapOptions = {
+        zoom: 16,
+        center: myLatlng
+        }
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+       var marker = new google.maps.Marker({
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: myLatlng
+        });
+
+        google.maps.event.addListener(marker, 'click', function (event) {
+        document.getElementById("latbox").value = event.latLng.lat();
+        document.getElementById("lngbox").value = event.latLng.lng();
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+        document.getElementById("latbox").value = this.getPosition().lat();
+        document.getElementById("lngbox").value = this.getPosition().lng();
+        });
+      
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>

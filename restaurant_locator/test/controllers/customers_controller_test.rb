@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class CustomersControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+ test "user can log in" do
+  get new
+  get root_path
+
+ end
 end

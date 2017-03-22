@@ -2,7 +2,7 @@
 <%= link_to "Home", root_path, :class => "btn btn-primary" %>
 <h2>Edit Registration</h2>
 <%= form_for(@restaurant, :url => {:action => "restaurant_update"}) do |f| %>
-
+	<div class="col-lg-6">
 	<%= f.label :restaurant_name %>
 	<p><%= f.text_field :restaurant_name %></p>
 
@@ -17,7 +17,8 @@
 
 	<%= f.label :style %>
 	<p><%= f.text_field :r_style %></p>
-
+	</div>
+	<div class="col-lg-6">
 	<%= f.label :email %>
 	<p><%= f.text_field :r_email %></p>
 
@@ -32,7 +33,7 @@
 
 	<%= f.label :latitude %>
 	<p><%= f.text_field :r_latitude, :id => 'latbox' %></p>
-
+	</div>
     <%= f.submit "Update", class: "btn btn-primary" %>
 <% end %>
 </center>
@@ -43,9 +44,10 @@
     width:410px;
     height:calc(100% - 0);
     position:absolute;
-    margin-left: 20px;
-    top:120px;
-    bottom:-350px;
+    margin-left: 470px;
+    margin-top: 300px;
+    bottom: -120px; 
+    top:200px;
     overflow:hidden;
 }
 </style>

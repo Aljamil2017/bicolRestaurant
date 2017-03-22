@@ -25,9 +25,11 @@ class RestaurantsController < ApplicationController
 		# temporary validator for restaurant registration
 		# dapat may laman gabos na text field pag igwa, register
 		if @restaurant.save
+			flash[:success] = "Successfully Created Restaurant"
 			redirect_to root_path
 		# pag may sarong mayong laman, balik sa registration page, wala pang error print
 		else
+			flash[:error] = "Error in Creating Restaurant"
 			redirect_to "/restaurants/registration"
 		end
 	end
