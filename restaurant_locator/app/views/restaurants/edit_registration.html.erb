@@ -1,10 +1,14 @@
 <center>
 <%= link_to "Home", root_path, :class => "btn btn-primary" %>
-<h2>Edit Registration</h2>
+<h2>Edit Restaurant Registration</h2>
 <%= form_for(@restaurant, :url => {:action => "restaurant_update"}) do |f| %>
 	<div class="col-lg-6">
-	<%= f.label :restaurant_name %>
-	<p><%= f.text_field :restaurant_name %></p>
+
+	<%= f.label :Username %>
+	<p><%= f.text_field :r_username %></p>
+
+	<%= f.label :Password %>
+	<p><%= f.password_field :r_password %></p>
 
 	<%= f.label :restaurant_name %>
 	<p><%= f.text_field :restaurant_name %></p>
@@ -14,10 +18,12 @@
 
 	<%= f.label :address %>
 	<p><%= f.text_field :r_address %></p>
-
+	
+	</div>
+	
 	<%= f.label :style %>
 	<p><%= f.text_field :r_style %></p>
-	</div>
+	
 	<div class="col-lg-6">
 	<%= f.label :email %>
 	<p><%= f.text_field :r_email %></p>

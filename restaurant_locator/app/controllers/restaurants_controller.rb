@@ -51,7 +51,9 @@ class RestaurantsController < ApplicationController
 
 	def restaurant_update
 		@restaurant =  Restaurant.find(params[:id])
-		@restaurant.update({:restaurant_name => params[:restaurant][:restaurant_name],
+		if @restaurant.update({:r_username => params[:restaurant][:r_username],
+				:r_password => params[:restaurant][:r_password],
+				:restaurant_name => params[:restaurant][:restaurant_name],
 				:r_contact => params[:restaurant][:r_contact],
 				:r_address => params[:restaurant][:r_address],
 				:r_email => params[:restaurant][:r_email],
@@ -60,7 +62,14 @@ class RestaurantsController < ApplicationController
 				:r_close_time => params[:restaurant][:r_close_time],
 				:r_longitude => params[:restaurant][:r_longitude],
 				:r_latitude => params[:restaurant][:r_latitude] })
-		redirect_to "/restaurants/info/#{@restaurant.id}"
+			flash[:success] = "Successfully Updated Restaurant"
+			redirect_to root_path
+		# pag may sarong mayong laman, balik sa registration page, wala pang error print
+		else
+			flash[:error] = "Error in Updating Restaurant"
+			redirect_to "/restaurants/info/#{@restaurant.id}/edit_registration"
+		end		
+
 	end
 
 	def deactivate
