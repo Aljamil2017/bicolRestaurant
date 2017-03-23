@@ -1,0 +1,184 @@
+<style>
+#map-canvas {
+    width:410px;
+    height:calc(100% - 0);
+    position:absolute;
+    margin-left: 2px;
+    margin-top: 200px;
+    bottom: 50px; 
+    top:150px;
+    overflow:hidden;
+}
+
+p {
+  color: white;
+}
+</style> 
+ <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to "Restaurant Locator System", root_path, :class => "navbar-brand" %>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">Current User: <%= Customer.find_by(id: session[:c_id]).c_firstname %></a>
+                    </li>
+                    <li>
+                       
+                    </li>
+                </ul>
+                
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+<script type="text/javascript">
+
+      initMap();
+
+      function initMap() {
+
+          var pointA = new google.maps.LatLng("<%= @customer.c_latitude %>", "<%= @customer.c_longitude %>"),
+          pointB = new google.maps.LatLng("<%= @restaurant.r_latitude %>", "<%= @restaurant.r_longitude %>"),
+          myOptions = {
+            center: pointA
+          },
+          map = new google.maps.Map(document.getElementById("map-canvas"), myOptions),
+          // Instantiate a directions service.
+
+          directionsService = new google.maps.DirectionsService,
+          directionsDisplay = new google.maps.DirectionsRenderer({
+            map: map,
+            suppressMarkers: true,
+            polylineOptions: {
+              strokeColor: "red",
+              strokeOpacity: 0.7,
+              strokeWeight: 5
+           }
+          }),
+
+          markerA = new google.maps.Marker({
+            position: pointA,
+            title: "Customer",
+            icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+            map: map
+          }),
+          markerB = new google.maps.Marker({
+            position: pointB,
+            title: "Restaurant",
+            icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+            map: map
+          });
+
+        // get route from A to B
+        calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+
+      }
+
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+        directionsService.route({
+          origin: pointA,
+          destination: pointB,
+          travelMode: google.maps.TravelMode.WALKING
+        }, function(response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+           
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+</script>
+
+
+
+ <div class="container">
+  <div class="row" style= "color:white;">
+<center>
+<h2>Restaurant Details</h2>
+
+<p><div id="map-canvas">Map Here</div></p>
+<p>
+  <strong>Restaurant Name:</strong>
+  <%= @restaurant.restaurant_name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @restaurant.r_address %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @restaurant.r_contact %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @restaurant.r_style %>
+</p>
+
+<p>
+  <strong>Opening Time:</strong>
+  <%= @restaurant.r_start_time %>
+</p>
+
+<p>
+  <strong>Closing Time:</strong>
+  <%= @restaurant.r_close_time %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @restaurant.r_longitude %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @restaurant.r_latitude %>
+</p>
+
+<button onclick="initMap()">Reload Map</button>
+
+<h3>MENU</h3>
+<table>
+<% @menutype.each do |menutype| %>
+    <tr style="border-color: white">
+      <th style="border-color: white"><strong><%= menutype.menu_name %></strong></th>
+    </tr>
+    <td style="border-color: white">
+    <%  Dish.where(menutype_id: menutype.id).each do |dish| %>
+        
+        <p><%= dish.dish_name %> - <%= dish.dish_price %></p>
+        
+      <% end %>
+    </td>
+  <% end %>
+</table>
+</center>
+<style>
+th, td {
+  font-size: 16px;
+  border: 2px solid black;
+}
+</style>
+
+
+<p></p>
+</div>
+</div>

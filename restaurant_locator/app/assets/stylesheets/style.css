@@ -1,9 +1,0 @@
-#map-canvas {
-    width:410px;
-    height:calc(100% - 0);
-    position:absolute;
-    margin-left: 20px;
-    top:220px;
-    bottom:-350px;
-    overflow:hidden;
-}

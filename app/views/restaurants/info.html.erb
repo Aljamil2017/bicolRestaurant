@@ -1,0 +1,183 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to "Restaurant Locator System", root_path, :class => "navbar-brand" %>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                    <li>
+                       
+                    </li>
+                </ul>
+                
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+<style>
+#map-canvas {
+    width:410px;
+    height:calc(100% - 0);
+    position:absolute;
+    margin-left: -20px;
+    margin-top: 200px; 
+    top:150px;
+    overflow:hidden;
+}
+p {
+  color: white;
+}
+
+</style>
+
+<script type="text/javascript">
+      initialize();
+
+      function initialize() {
+        var myLatlng = new google.maps.LatLng("<%= @restaurant.r_latitude%>","<%= @restaurant.r_longitude %>");
+        var mapOptions = {
+        zoom: 16,
+        center: myLatlng
+        }
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+       var marker = new google.maps.Marker({
+            map: map,
+            draggable: false,
+            animation: google.maps.Animation.DROP,
+            position: myLatlng
+        });
+
+        google.maps.event.addListener(marker, 'click', function (event) {
+        document.getElementById("latbox").value = event.latLng.lat();
+        document.getElementById("lngbox").value = event.latLng.lng();
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+        document.getElementById("latbox").value = this.getPosition().lat();
+        document.getElementById("lngbox").value = this.getPosition().lng();
+        });
+      
+      }
+
+     
+
+</script>
+
+
+<div class="container">
+  <div class="row" style= "color:white;">
+<div id="map-canvas">Map Here</div>
+
+<center>
+
+<h2>Restaurant Details</h2>
+<%= session[:r_id]  %>
+
+<p>
+  <strong>Restaurant Name:</strong>
+  <%= @restaurant.restaurant_name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @restaurant.r_address %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @restaurant.r_contact %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @restaurant.r_style %>
+</p>
+
+<p>
+  <strong>Opening Time:</strong>
+  <%= @restaurant.r_start_time %>
+</p>
+
+<p>
+  <strong>Closing Time:</strong>
+  <%= @restaurant.r_close_time %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @restaurant.r_longitude %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @restaurant.r_latitude %>
+</p>
+
+<button onclick="initialize()">Reload Map</button>
+
+<h3>MENU</h3>
+<table>
+<% @menutype.each do |menutype| %>
+    <tr>
+      <th><strong><%= menutype.menu_name %></strong></th>
+    </tr>
+    <td>
+    <%  Dish.where(menutype_id: menutype.id).each do |dish| %>
+        
+        <p><%= dish.dish_name %> - <%= dish.dish_price %></p>
+        
+      <% end %>
+    </td>
+  <% end %>
+</table>
+
+<h3>Add Menu Type</h3>
+<%= form_for(@menutype_new, :url => {:action => "create_menutype"}) do |g| %>
+  <%= g.label :menu_name %>
+  <p><%= g.text_field :menu_name %></p>
+
+  
+  <p><%= g.hidden_field :restaurant_id, :value => @restaurant.id %></p>
+
+    <%= g.submit "Add", class: "btn btn-primary" %>
+<% end %>
+
+<h3>Add Dish</h3>
+<%= form_for(@dish, :url => {:action => "create_dish"}) do |f| %>
+
+  <%= f.label :dish_name %>
+  <p><%= f.text_field :dish_name %></p>
+
+  <%= f.label :dish_price %>
+  <p><%= f.text_field :dish_price %></p>
+
+  <p><%= f.select(:menutype_id, options_for_select( @menutype = Menutype.where(restaurant_id: @restaurant.id).map{ |g| [g.menu_name, g.id] } ), {:class => "styled-select"}) %></p>
+
+    <%= f.submit "Add Dish", class: "btn btn-primary" %>
+<% end %>
+</center>
+<style>
+th, td {
+  font-size: 16px;
+  border: 2px solid white;
+}
+</style>
+
+
+<p></p>
+</div>
+</div>

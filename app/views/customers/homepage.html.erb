@@ -1,0 +1,72 @@
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to "Restaurant Locator System", root_path, :class => "navbar-brand" %>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">Current User: <%= Customer.find_by(id: session[:c_id]).c_firstname %></a>
+                    </li>
+                    <li>
+                       
+                    </li>
+                </ul>
+                
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+    <a href="../../customers/<%= Customer.find_by(id: session[:c_id]).id %>/edit_creg" class="btn btn-primary"> Update Profile</a>
+    <p></p>
+    <p></p>
+            <div class="row">
+            	
+
+            	<% @restaurants.each do |r| %>
+					<div class="col-sm-4 col-lg-4 col-md-4">
+				        <div class="thumbnail">
+					            <%= image_tag "320x150d.jpg" %>
+				            <div class="caption">
+				                <center><h4><a href="res_info/<%= r.id %>"><%= r.restaurant_name %></a></h4></center>
+				            </div>
+				        </div>
+				     </div>
+				<% end %>
+                    
+            </div>
+
+    <!-- /.container -->
+    </div>
+    <div class="container">
+
+        <hr>
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <center><p>Web Development Project</p></center>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</body>
+
+
+
+
